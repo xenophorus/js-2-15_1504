@@ -11,7 +11,7 @@
 
  //let products = [] //массив объектов
  
- let catalog = {
+ export let catalog = {
     items: [],
     container: '.products',
     cart: null,
@@ -55,7 +55,7 @@
                         <h1>${item.product_name}</h1>
                         <p>${item.price}</p>
                         <button 
-                        class="buy-btn" 
+                        class="buy-btn"
                         name="buy-btn"
                         data-name="${item.product_name}"
                         data-price="${item.price}"
@@ -69,7 +69,7 @@
      }
  }
 
- let cart = {
+ export let cart = {
     items: [],
     total: 0,
     sum: 0,
