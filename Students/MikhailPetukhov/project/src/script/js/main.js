@@ -3,11 +3,11 @@
  let PRODUCTS_NAMES = ['Комбинезон', 'Куртка', 'Куртка', 'Пальто', 'Куртка']
  let PRICES = [2000, 1200, 1600, 1800, 1200]
  let IDS = [0, 1, 2, 3, 4]
- let IMGS = ['./img/10-88-325-3.jpg', 
- './img/11-150-317-1.jpg',
- './img/102-854-143-6605-1.jpg',
- './img/108-506-143-4035-1.jpg',
- './img/12608-JOEL-611-848-1.jpg']
+ let IMGS = ['./assets/img/10-88-325-3.jpg', 
+ './assets/img/11-150-317-1.jpg',
+ './assets/img/102-854-143-6605-1.jpg',
+ './assets/img/108-506-143-4035-1.jpg',
+ './assets/img/12608-JOEL-611-848-1.jpg']
 
  //let products = [] //массив объектов
  
@@ -154,6 +154,9 @@
         this.priceBlock.innerText = this.sum
     }
  }
+ 
+export default function app() {
+    catalog.construct (cart) //тут происходит создание объекта и вся прочая магия
+    cart.construct ()    
+ }
 
- catalog.construct (cart) //тут происходит создание объекта и вся прочая магия
- cart.construct ()
