@@ -39,7 +39,7 @@ class Order {
         			`;
         })
          str += `
-				<div>total amount: ${orderAmount}, total calories: ${orderCalories}</div>
+				<div>TOTAL AMOUNT: ${orderAmount}, TOTAL CALORIES: ${orderCalories}</div>
         		`;       
         document.querySelector("#order").innerHTML = str;		
 	}

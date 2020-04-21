@@ -23,16 +23,17 @@ class App {
         let toppings = Object.keys(TOPPINGS);
     	let str = `<form action="#" id="app-form"><fieldset>`;
 
-        str += `<label><input type="radio" name="Base" value="small"> Small </label>
-            <label><input type="radio" name="Base" value="large"> Large </label>`;
 
+        bases.forEach( el =>
+            str += `<label class="my_label"><input type="radio" name="Base" value="${el}"> ${el} </label>`
+        );
         str += `</fieldset><fieldset>`
         stuffings.forEach(el =>
-            str += `<label><input type="radio" name="Stuffing" value="${el}"> ${el.toUpperCase()} </label>`
+            str += `<label class="my_label"><input type="radio" name="Stuffing" value="${el}"> ${el} </label>`
          );
         str += `</fieldset><fieldset>`
         toppings.forEach(el =>
-            str += `<label><input type="checkbox" name="Topping" data-topping="${el}"> ${el} </label>`
+            str += `<label class="my_label"><input type="checkbox" name="Topping" data-topping="${el}"> ${el} </label>`
          );
         str += `
                 </fieldset>

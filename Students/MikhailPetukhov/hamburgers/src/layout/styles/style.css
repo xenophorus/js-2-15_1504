@@ -2,3 +2,7 @@ body {
     padding: 0;
     margin: 0;
 }
+
+.my_label {
+    margin-right: 5px;
+}
