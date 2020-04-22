@@ -155,6 +155,18 @@ let cart = {
     }
  }
 
+class Basket{
+    constructor(){
+
+    };
+};
+
+class ItemsBasket{
+    constructor(){
+
+    };
+};
+
 export default ()=>{ 
     catalog.construct (cart) //тут происходит создание объекта и вся прочая магия
     cart.construct ()
