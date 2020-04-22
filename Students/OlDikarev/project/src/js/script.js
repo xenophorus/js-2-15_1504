@@ -7,14 +7,14 @@ const goods = [
 ];
   
   const renderGoodsItem = (title, price) => {
-      return '<div class="goods-item"><h3>${title}</h3><p>${price}</p></div>';
+      return `<div class="goods-item"><h3>${title}</h3><p>${price}</p></div>`;
   };
 
   const renderGoodsList = (list) => {
       let goodsList = list.map(item => renderGoodsItem(item.title, item.price));
       
-      document.getElementsByClassName("goods-list").innerHTML = goodsList;
+      document.querySelector('.goods-list').innerHTML = goodsList;
      
   };
- // console.log(document.getElementsByClassName("goods-list"));
+
   renderGoodsList(goods);
