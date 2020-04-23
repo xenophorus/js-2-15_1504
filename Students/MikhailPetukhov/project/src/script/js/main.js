@@ -48,8 +48,11 @@ import exec from "./components/requests.js";
     _handleRequest() {
         console.log("request started");
         let url = 'https://raw.githubusercontent.com/petmik2018/shop_data/master/products/products.json';
-        let result = exec(url);
-        console.log(result);
+        exec(url)
+            .then(data => {
+                console.log(data);
+                console.log("exec in main completed");
+            })
     }
 
     // _createNewProduct (index) {

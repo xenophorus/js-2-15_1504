@@ -19,14 +19,11 @@ function getData(reqUrl) {
 export default function exec(rUrl) {
     getData(rUrl)
         .then(data => {
-            // console.log(data);
-            return data
+            console.log(data);
+            console.log("exec completed");
+            return data;
         })
         .catch(err => {
             console.log(err);
         })
-        .finally(() => {
-            console.log('request end')
-        })
-
 }
