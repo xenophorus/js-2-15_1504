@@ -1,19 +1,5 @@
  //ИМИТАЦИЯ РАБОТЫ БАЗЫ ДАННЫХ И СЕРВЕРА
 
- // let PRODUCTS_NAMES = ['Комбинезон', 'Куртка', 'Куртка', 'Пальто', 'Куртка']
- // let PRICES = [2000, 1200, 1600, 1800, 1200]
- // let IDS = [0, 1, 2, 3, 4]
- // let IMGS = ['./assets/img/10-88-325-3.jpg', 
- // './assets/img/11-150-317-1.jpg',
- // './assets/img/102-854-143-6605-1.jpg',
- // './assets/img/108-506-143-4035-1.jpg',
- // './assets/img/12608-JOEL-611-848-1.jpg']
-
- //let products = [] //массив объектов
-
-
-import exec from "./components/requests.js";
-
  class Catalog {
     constructor(cart) {
         this.items = [];
@@ -24,10 +10,6 @@ import exec from "./components/requests.js";
 
     _init () {
         this._handleRequest()
-        // this._handleData ()
-        this.render ()
-        this._handleEvents ()
-
     }
 
     _handleEvents () {
@@ -38,31 +20,42 @@ import exec from "./components/requests.js";
         })
     }
 
-
-    // _handleData () {
-    //     for (let i = 0; i < IDS.length; i++) {
-    //         this.items.push (this._createNewProduct (i))
-    //     }
-    // }
+    _getData(reqUrl) {
+         return new Promise((res, rej) => {
+            let req = new XMLHttpRequest(); //если не считаем IE
+            req.open('GET', reqUrl, true); 
+                    
+            req.onreadystatechange = function () {
+                if (req.readyState == 4) {
+                    if(req.status == 200) {
+                        res(JSON.parse(req.responseText));
+                    } else {
+                        rej('error');
+                    }
+                }
+            };
+            req.send(); 
+        }) 
+    }
 
     _handleRequest() {
         console.log("request started");
         let url = 'https://raw.githubusercontent.com/petmik2018/shop_data/master/products/products.json';
-        exec(url)
-            .then(data => {
-                console.log(data);
-                console.log("exec in main completed");
+        this._getData(url)
+            .then(data => {          
+                this.items = data;
+                console.log(this.items);
             })
-    }
+            .catch(err => {
+                console.log(err);
+            })
+            .finally(() => {
+                console.log("request completed");
+                this.render ();
+                this._handleEvents ();
+            })
+    } 
 
-    // _createNewProduct (index) {
-    //     return {
-    //         product_name: PRODUCTS_NAMES [index],
-    //         price: PRICES [index],
-    //         id_product: IDS [index],
-    //         img: IMGS [index]
-    //     }
-    // }
 
     render () {
         let str = ''
