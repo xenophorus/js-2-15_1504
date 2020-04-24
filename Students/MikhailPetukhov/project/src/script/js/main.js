@@ -44,9 +44,11 @@
         this._getData(url)
             .then(data => {          
                 this.items = data;
-                console.log(this.items);
+                console.log(data);
+                console.log("data loaded");
             })
             .catch(err => {
+                this.items = [];
                 console.log(err);
             })
             .finally(() => {
@@ -71,6 +73,7 @@
                         class="buy-btn" 
                         name="buy-btn"
                         data-name="${item.name}"
+                        data-style="${item.style}"
                         data-price="${item.price}"
                         data-id="${item.id}"
                         >Купить</button>
@@ -122,6 +125,7 @@
     _createNewProduct (prod) {
         return {
             product_name: prod.dataset['name'],
+            product_style: prod.dataset['style'],
             price: prod.dataset['price'],
             id_product: prod.dataset['id'],
             quantity: 1
@@ -157,7 +161,7 @@
         let str = ''
         this.items.forEach (item => {
             str += `<div class="cart-item" data-id="${item.id_product}">
-                    <img src="https://placehold.it/100x80" alt="">
+                    <img src="https://fastpic.co/images/${item.product_style}.jpg" alt="">
                     <div class="product-desc">
                         <p class="product-title">${item.product_name}</p>
                         <p class="product-quantity">${item.quantity}</p>
