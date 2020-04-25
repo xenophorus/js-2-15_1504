@@ -1,7 +1,7 @@
-import {catalog} from './components/catalog.js';
-import {cart} from './components/cart.js';
+import {Catalog} from './components/catalog.js';
+import {Cart} from './components/cart.js';
 
 export default function () { 
-    catalog.construct (cart); //тут происходит создание объекта и вся прочая магия
-    cart.construct ()
+    let cart = new Cart();
+    let catalog = new Catalog(cart);
   }
