@@ -1,8 +1,9 @@
 import bootstrap from 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import './layout/styles/normalize.css';
 import './layout/styles/style.css';
-import app from './script/js/main.js';
 
-app()
+import app from './script/js/main';
+
+
+app();

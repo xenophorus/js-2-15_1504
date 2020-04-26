@@ -11,7 +11,7 @@
 
  //let products = [] //массив объектов
  
-let catalog = {
+ export let catalog = {
     items: [],
     container: '.products',
     cart: null,
@@ -55,7 +55,7 @@ let catalog = {
                         <h1>${item.product_name}</h1>
                         <p>${item.price}</p>
                         <button 
-                        class="buy-btn" 
+                        class="buy-btn"
                         name="buy-btn"
                         data-name="${item.product_name}"
                         data-price="${item.price}"
@@ -69,7 +69,7 @@ let catalog = {
      }
  }
 
-let cart = {
+ export let cart = {
     items: [],
     total: 0,
     sum: 0,
@@ -155,20 +155,5 @@ let cart = {
     }
  }
 
-class Basket{
-    constructor(){
-
-    };
-};
-
-class ItemsBasket{
-    constructor(){
-
-    };
-};
-
-export default ()=>{ 
-    catalog.construct (cart) //тут происходит создание объекта и вся прочая магия
-    cart.construct ()
-}
- 
+ catalog.construct (cart) //тут происходит создание объекта и вся прочая магия
+ cart.construct ()

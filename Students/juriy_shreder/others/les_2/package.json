@@ -1,5 +1,5 @@
 {
-  "name": "project",
+  "name": "les_2",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,12 +7,11 @@
     "build": "webpack --mode development",
     "dev": "webpack-dev-server --open"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/bootstrap": "^4.3.2",
     "css-loader": "^3.5.2",
-    "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.2.0",
     "mini-css-extract-plugin": "^0.9.0",
     "webpack": "^4.42.1",

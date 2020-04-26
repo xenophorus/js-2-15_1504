@@ -1,65 +1,78 @@
  //ИМИТАЦИЯ РАБОТЫ БАЗЫ ДАННЫХ И СЕРВЕРА
 
- let PRODUCTS_NAMES = ['Комбинезон', 'Куртка', 'Куртка', 'Пальто', 'Куртка']
- let PRICES = [2000, 1200, 1600, 1800, 1200]
- let IDS = [0, 1, 2, 3, 4]
- let IMGS = ['./img/10-88-325-3.jpg', 
- './img/11-150-317-1.jpg',
- './img/102-854-143-6605-1.jpg',
- './img/108-506-143-4035-1.jpg',
- './img/12608-JOEL-611-848-1.jpg']
+ class Catalog {
+    constructor(cart) {
+        this.items = [];
+        this.container = '.products';
+        this.cart = cart;
+        this._init();
+    }
 
- //let products = [] //массив объектов
- 
- let catalog = {
-    items: [],
-    container: '.products',
-    cart: null,
-    construct (cart) {
-        this.cart = cart
-        this._init () //_ - это обозначение инкапсулированного метода
-    },
     _init () {
-        this._handleData ()
-        this.render ()
-        this._handleEvents ()
-    },
+        this._handleRequest()
+    }
+
     _handleEvents () {
         document.querySelector (this.container).addEventListener ('click', (evt) => {
             if (evt.target.name === 'buy-btn') {
                 this.cart.addProduct (evt.target)
             }
         })
-    },
-    _handleData () {
-        for (let i = 0; i < IDS.length; i++) {
-            this.items.push (this._createNewProduct (i))
-        }
-    },
-    _createNewProduct (index) {
-        return {
-            product_name: PRODUCTS_NAMES [index],
-            price: PRICES [index],
-            id_product: IDS [index],
-            img: IMGS [index]
-        }
-    },
+    }
+
+    _getData(reqUrl) {
+         return new Promise((res, rej) => {
+            let req = new XMLHttpRequest(); //если не считаем IE
+            req.open('GET', reqUrl, true); 
+                    
+            req.onreadystatechange = function () {
+                if (req.readyState == 4) {
+                    if(req.status == 200) {
+                        res(JSON.parse(req.responseText));
+                    } else {
+                        rej('error');
+                    }
+                }
+            };
+            req.send(); 
+        }) 
+    }
+
+    _handleRequest() {
+        console.log("request started");
+        let url = 'https://raw.githubusercontent.com/petmik2018/shop_data/master/products/products.json';
+        this._getData(url)
+            .then(data => {          
+                this.items = data;
+                console.log(this.items);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+            .finally(() => {
+                console.log("request completed");
+                this.render ();
+                this._handleEvents ();
+            })
+    } 
+
+
     render () {
         let str = ''
         this.items.forEach (item => {
             str += `
                 <div class="product-item">
-                    <img src="${item.img}" alt="${item.product_name}">
-                    <!--img src="${item.img}" width="300" height="200" alt="${item.product_name}"-->
+                    <img src="${item.image_link}" alt="${item.name}">
+                    <!--img src="${item.image_link}" width="300" height="200" alt="${item.name}"-->
                     <div class="desc">
-                        <h1>${item.product_name}</h1>
+                        <h1>${item.name}</h1>
                         <p>${item.price}</p>
                         <button 
                         class="buy-btn" 
                         name="buy-btn"
-                        data-name="${item.product_name}"
+                        data-name="${item.name}"
                         data-price="${item.price}"
-                        data-id="${item.id_product}"
+                        data-id="${item.id}"
                         >Купить</button>
                     </div>
                 </div>
@@ -69,29 +82,32 @@
      }
  }
 
- let cart = {
-    items: [],
-    total: 0,
-    sum: 0,
-    container: '.cart-block',
-    quantityBlock: document.querySelector ('#quantity'),
-    priceBlock: document.querySelector ('#price'),
-    construct () {
-        this._init ()
-    },
+ class Cart {
+    constructor() {
+        this.items = [];
+        this.total = 0;
+        this.sum = 0;
+        this.container = '.cart-block';
+        this.quantityBlock = document.querySelector ('#quantity');
+        this.priceBlock = document.querySelector ('#price');
+        this._init ();
+    }
+    
     _init () {
         this._handleEvents ()
-    },
+    }
+
     _handleEvents () {
         document.querySelector (this.container).addEventListener ('click', (evt) => {
             if (evt.target.name === 'del-btn') {
                 this.deleteProduct (evt.target)
             }
         })
-    },
+    }
+
     addProduct (product) {
         let id = product.dataset['id']
-        let find = this.items.find (product => product.id_product === id)
+        let find = this.items.find (product => product.id === id)
         if (find) {
             find.quantity++
         } else {
@@ -101,7 +117,8 @@
          
         this._checkTotalAndSum ()
         this.render ()
-    },
+    }
+
     _createNewProduct (prod) {
         return {
             product_name: prod.dataset['name'],
@@ -109,7 +126,8 @@
             id_product: prod.dataset['id'],
             quantity: 1
         }
-    },
+    }
+
     deleteProduct (product) {
         let id = product.dataset['id']
         let find = this.items.find (product => product.id_product === id)
@@ -121,7 +139,7 @@
          
         this._checkTotalAndSum ()
         this.render ()
-    },
+    }
     
     _checkTotalAndSum () {
         let qua = 0
@@ -132,7 +150,8 @@
         })
         this.total = qua
         this.sum = pr
-    },
+    }
+
     render () {
         let itemsBlock = document.querySelector (this.container).querySelector ('.cart-items')
         let str = ''
@@ -154,6 +173,10 @@
         this.priceBlock.innerText = this.sum
     }
  }
+ 
+export default function app() {
+    let cart = new Cart()  
+    let catalog = new Catalog(cart)//тут происходит создание объекта и вся прочая магия
+ 
+ }
 
- catalog.construct (cart) //тут происходит создание объекта и вся прочая магия
- cart.construct ()
