@@ -6,6 +6,7 @@ class List {
         this.url = url;
         this.container = container;
         this.items = [];
+        this.filteredItems = [];
         this._init();
         this._handleEvents();
 
@@ -32,6 +33,7 @@ class List {
             console.log(`Error loading ${this.constructor.name} data`)
         }
         finally {
+            this.filteredItems = this.items;
             this.render();
             if (this.constructor.name == "Basket") {
                 this._checkTotalAndAmount();
@@ -63,7 +65,7 @@ class List {
     render() {
         let block = document.querySelector(this.container);
         let str = '';
-        this.items.forEach(item => {
+        this.filteredItems.forEach(item => {
             let newItem = new dependencies[this.constructor.name](item);
             str += newItem.render();
         })
@@ -111,7 +113,18 @@ class Catalog extends List {
                 this.basket.add(event.target, imageLink);
                
             }
+        });
+        document.querySelector(".btn-search").addEventListener('click', () => {
+            this._filterItems();
         })
+    }
+    _filterItems() {
+        let data = document.querySelector(`input[class="search-field"]`).value;
+        console.log(data);
+        console.log("Items filtered");
+        const regexp = new RegExp(data, 'i');
+        this.filteredItems = this.items.filter(item => regexp.test(item.name));
+        this.render();
     }
 };
 
