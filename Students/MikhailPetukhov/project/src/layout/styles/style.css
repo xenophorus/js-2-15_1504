@@ -87,7 +87,7 @@ img {
     width: 300px;
 }
 
-.invisible{
+.hidden{
     display: none;
 }
 .cart-block:before{
