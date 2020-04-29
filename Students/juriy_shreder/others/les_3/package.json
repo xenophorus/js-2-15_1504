@@ -1,15 +1,15 @@
 {
-  "name": "juinit",
+  "name": "les_3",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode development",
     "dev": "webpack-dev-server --open"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
-  "keywords": [],
-  "description": "",
   "devDependencies": {
     "css-loader": "^3.5.3",
     "html-webpack-plugin": "^4.2.0",
