@@ -4,7 +4,8 @@ const app = new Vue({
         url: 'https://raw.githubusercontent.com/sharapov2701/goods/master/goods.json',
         catalog: [],
         cart: [],
-        toggle_cart: false
+        toggle_cart: false,
+        search_line: ''
     },
     methods: {
         buy (item) {
@@ -22,6 +23,7 @@ const app = new Vue({
             if (find.quantity > 1) {
                 find.quantity--
             } else {
+                find.quantity--
                 this.cart.splice (this.cart.indexOf(find), 1)
             }
         }
@@ -40,7 +42,16 @@ const app = new Vue({
                 quantity += item.quantity;
             });
             return quantity;
-        }
+        },
+        catalog_filtered () {
+            if (this.search_line !== '') {
+                const regexp = new RegExp(this.search_line, 'i');
+                let catalog_filtered = this.catalog.filter(good => regexp.test(good.name));
+                return catalog_filtered
+            } else {
+                return this.catalog
+            }
+          }
     },
     async beforeMount() {
         try{

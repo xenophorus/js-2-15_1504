@@ -12,7 +12,7 @@
             <div class="logo">E-shop</div>
             <div class="cart">
                 <form action="#" class="search-form">
-                    <input type="text" class="search-field">
+                    <input type="text" class="search-field" v-model="search_line">
                     <button class="btn-search">
                         <i class="fas fa-search"></i>
                     </button>
@@ -47,8 +47,8 @@
             </div>
         </header>
         <main>
-            <div class="products">
-                <div class="product-item" v-for="item in catalog" :key="item.id">
+            <div class="products" v-if="catalog.length != 0">
+                <div class="product-item" v-for="item in catalog_filtered" :key="item.id">
                     <div class="img-catalog">
                     <img :src="item.img" :alt="item.name">
                     </div>
@@ -59,6 +59,7 @@
                     </div>
                 </div>
             </div>
+            <div v-else>Склады пустуют :(</div>
         </main>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
