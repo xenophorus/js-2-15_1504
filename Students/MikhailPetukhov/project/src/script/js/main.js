@@ -11,12 +11,16 @@ function mainApp() {
         filteredItems: [],
         basketItems: [],
         showBasket: false,
+        emptyProductsList: false,
       },
       methods: {
         filterItems() {
             let data = document.querySelector(`input[class="search-field"]`).value;
             const regexp = new RegExp(data, 'i');
             this.filteredItems = this.catalogItems.filter(item => regexp.test(item.name));
+            this.emptyProductsList = (this.filteredItems.length == 0);
+            console.log(this.filteredItems.length);
+            console.log(this.emptyProductsList);
         },
         add(item) {
             let find = this.basketItems.find (product => product.id == item.id);
@@ -48,7 +52,7 @@ function mainApp() {
         }
         finally {
             this.filteredItems =  this.catalogItems;
-            console.log(this.basketItems);
+            console.log("data loaded")
         }
       },
       computed: {
@@ -68,4 +72,4 @@ function mainApp() {
     });
 
 }
-export default mainApp()
+export default mainApp

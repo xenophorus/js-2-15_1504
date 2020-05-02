@@ -45,6 +45,9 @@
         </header>
         <main>
             <div class="products">
+                <div class="list-comment" v-show="emptyProductsList">
+                    <h1>Нет данных</h1>
+                </div>
                 <div class="product-item" v-for="item of filteredItems" :key="item.id">
                     <img :src="item.image_link" :alt="item.style">
                     <div class="desc">
