@@ -1,7 +1,7 @@
  //ИМИТАЦИЯ РАБОТЫ БАЗЫ ДАННЫХ И СЕРВЕРА
 const API = 'https://raw.githubusercontent.com/petmik2018/shop_data/master/responses';
 
-export default function () {
+function mainApp() {
     const app = new Vue({
       el: '#app',
       data: {
@@ -19,19 +19,22 @@ export default function () {
             this.filteredItems = this.catalogItems.filter(item => regexp.test(item.name));
         },
         add(item) {
-            console.log("product " + item.id + " added");
             let find = this.basketItems.find (product => product.id == item.id);
             if (find) {
                 find.quantity++;
-                console.log(item);
             } else {
                 let newBasketItem = Object.assign({}, item);
                 newBasketItem.quantity = "1";
                 this.basketItems.push(newBasketItem);
             }
         },
-        remove() {
-
+        remove(item) {
+            let find = this.basketItems.find (product => product.id == item.id);
+            if (find.quantity > 1) {
+                find.quantity--
+            } else {
+                this.basketItems.splice (this.basketItems.indexOf(find), 1)
+            }
         },
 
       },
@@ -65,5 +68,4 @@ export default function () {
     });
 
 }
-
-
+export default mainApp()
