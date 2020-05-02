@@ -13,7 +13,7 @@ button:focus{
 }
 .logo{
 
-    /* text-transform: uppercase;*/
+    text-transform: uppercase;
     font-weight: bold;
 }
 .btn-cart{
@@ -40,7 +40,7 @@ button:focus{
 /*padding: 40px 80px;*/
 /*}*/
 .products{
-    column-gap: 20px;
+    column-gap: 30px;
     display: grid;
     grid-template-columns: repeat(auto-fit, 200px);
     grid-template-rows: 1fr;
@@ -87,7 +87,7 @@ img {
     width: 300px;
 }
 
-.hidden{
+.invisible{
     display: none;
 }
 .cart-block:before{
