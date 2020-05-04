@@ -57,23 +57,13 @@ p {
     border-radius: 5px;
     overflow: hidden;
     margin: 20px 0;
-}
-img {
-    max-width: 100%;
-    height: auto
-}
-.desc {
-    border: 1px solid #c0c0c040;
-    padding: 15px
-}
-
-.desc h1 {
-    font-size: 1em;
+    height: 350px;
 }
 
 .cart{
     position: relative;
 }
+
 .cart-block{
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.62);
     border-radius: 5px;
@@ -183,4 +173,33 @@ img {
 
 .d-block {
     display: block
+}
+
+img {
+    width: 100%;
+}
+
+.img-catalog {
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.img-cart {
+    height: 100px;
+    width: 100px;
+}
+
+.desc {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid #c0c0c040;
+    padding: 15px;
+    height: 50%;
+}
+
+.desc h1 {
+    font-size: 1em;
 }
