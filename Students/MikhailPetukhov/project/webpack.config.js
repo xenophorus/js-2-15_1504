@@ -1,12 +1,14 @@
 let HtmlWebpackPlugin = require('html-webpack-plugin');
 let MiniCssExtractPlugin = require('mini-css-extract-plugin');
+let VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: './src/public/index.html'
 		}),
-		new MiniCssExtractPlugin()
+		new MiniCssExtractPlugin(),
+		new VueLoaderPlugin()
 	],
 
 	module: {
@@ -22,7 +24,16 @@ module.exports = {
 	        		name: 'assets/img',
 	        	},
 			},            
-            
-		],		
-	},
+            {
+            	test: /\.js$/,
+            	loader: 'babel-loader',
+            	exclude: /node_modules/
+            },
+            {
+            	test: /\.vue$/,
+            	loader: 'vue-loader',
+            	exclude: /node_modules/
+            }
+		]		
+	}
 };
