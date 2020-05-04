@@ -11,16 +11,12 @@ function mainApp() {
         filteredItems: [],
         basketItems: [],
         showBasket: false,
-        emptyProductsList: false,
       },
       methods: {
         filterItems() {
             let data = document.querySelector(`input[class="search-field"]`).value;
             const regexp = new RegExp(data, 'i');
             this.filteredItems = this.catalogItems.filter(item => regexp.test(item.name));
-            this.emptyProductsList = (this.filteredItems.length == 0);
-            console.log(this.filteredItems.length);
-            console.log(this.emptyProductsList);
         },
         add(item) {
             let find = this.basketItems.find (product => product.id == item.id);
@@ -35,9 +31,9 @@ function mainApp() {
         remove(item) {
             let find = this.basketItems.find (product => product.id == item.id);
             if (find.quantity > 1) {
-                find.quantity--
+                find.quantity--;
             } else {
-                this.basketItems.splice (this.basketItems.indexOf(find), 1)
+                this.basketItems.splice (this.basketItems.indexOf(find), 1);
             }
         },
 
@@ -52,7 +48,6 @@ function mainApp() {
         }
         finally {
             this.filteredItems =  this.catalogItems;
-            console.log("data loaded")
         }
       },
       computed: {
@@ -60,13 +55,13 @@ function mainApp() {
             return `${this.showBasket ? "Скрыть" : "Корзина"}`
         },
         computedSummary() {
-            let qua = 0;
+            let quantity = 0;
             let amount = 0;
             this.basketItems.forEach (item => {
-                qua += (+item.quantity);
+                quantity += (+item.quantity);
                 amount += item.price * item.quantity;
             });
-            return {qua: qua, amount: amount}
+            return {quantity, amount}
         },
       }
     });

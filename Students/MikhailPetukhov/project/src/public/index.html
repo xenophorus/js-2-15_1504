@@ -20,7 +20,7 @@
                 <button class="btn-cart" @click="showBasket = !showBasket">{{ computedLabel }}</button>
                 <div class="cart-block" v-show="showBasket">
                     <div class="d-flex">
-                        <strong class="d-block">Всего товаров</strong> <div id="quantity">{{ computedSummary.qua }}</div>
+                        <strong class="d-block">Всего товаров</strong> <div id="quantity">{{ computedSummary.quantity }}</div>
                     </div>
                     <hr>
                     <div class="cart-items">
@@ -44,10 +44,7 @@
             </div>
         </header>
         <main>
-            <div class="products">
-                <div class="list-comment" v-show="emptyProductsList">
-                    <h1>Нет данных</h1>
-                </div>
+            <div class="products" v-if="filteredItems.length">
                 <div class="product-item" v-for="item of filteredItems" :key="item.id">
                     <img :src="item.image_link" :alt="item.style">
                     <div class="desc">
@@ -59,7 +56,9 @@
                         </button>
                     </div>
                 </div>                
-
+            </div>
+            <div class="list-comment" v-else>
+                <h1>Нет данных</h1>
             </div>
         </main>
     </div>
