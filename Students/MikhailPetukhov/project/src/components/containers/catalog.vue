@@ -1,7 +1,8 @@
 <template>
     <div class="products">
-    	
-        <item v-for="item of items" :item="item" :key="item.id" :type="'catalog'"/>              
+
+        <item v-for="item of items" :item="item" :key="item.id" :type="'catalog'"/>  
+
     </div>
 </template>
 
@@ -25,6 +26,7 @@
 			})
 		}
 	}
+	
 </script>
 
 <style>

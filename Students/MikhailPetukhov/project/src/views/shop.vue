@@ -9,14 +9,12 @@
                         <i class="fas fa-search"></i>
                     </button>
                 </form>
-                <button class="btn-cart" @click="showBasket = !showBasket">Basket</button>
-
-                <basket v-show="showBasket"/>
-
+                <button class="btn-cart" @click="showBasket = !showBasket">{{ computedLabel }}</button>
+                <basket v-show="showBasket" ref="basket"/>
             </div>
         </header>
         <main>
-        	<catalog />
+        	<catalog @add="addToBasket"/>
         </main>
 	</div>	
 </template>	
@@ -34,9 +32,16 @@
 		methods: {
 			get(url) {
 				return fetch(url).then(d => d.json());
-			}
-		}
-		
+			},
+            addToBasket(item) {
+                this.$refs.basket.add(item);
+            }
+		},
+        computed: {
+            computedLabel() {
+                return `${this.showBasket ? "Скрыть" : "Корзина"}`
+            }
+        },
 	}
 </script>
 
