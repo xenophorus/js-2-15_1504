@@ -5,7 +5,7 @@
             <div class="cart">
                 <form action="#" class="search-form">
                     <input type="text" class="search-field">
-                    <button class="btn-search">
+                    <button class="btn-search" @click="filterProducts">
                         <i class="fas fa-search"></i>
                     </button>
                 </form>
@@ -14,7 +14,7 @@
             </div>
         </header>
         <main>
-        	<catalog @add="addToBasket"/>
+        	<catalog ref="catalog" @add="addToBasket"/>
         </main>
 	</div>	
 </template>	
@@ -35,6 +35,10 @@
 			},
             addToBasket(item) {
                 this.$refs.basket.add(item);
+            },
+            filterProducts() {
+                let data = document.querySelector(`input[class="search-field"]`).value;
+                this.$refs.catalog.filterItems(data);
             }
 		},
         computed: {
