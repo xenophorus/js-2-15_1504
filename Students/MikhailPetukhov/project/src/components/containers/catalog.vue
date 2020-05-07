@@ -5,7 +5,8 @@
         	v-for="item of filteredItems"
         	:item="item"
         	:key="item.id"
-        />  
+        /> 
+        <item :type="'temp'" @addNewItem="createNew"/>  
 
     </div>
     <div v-else>
@@ -27,7 +28,8 @@
 			return {
 				items:[],
 				filteredItems:[],
-				url: 'https://raw.githubusercontent.com/petmik2018/shop_data/master/responses/getCatalog.json'
+				// url: 'https://raw.githubusercontent.com/petmik2018/shop_data/master/responses/getCatalog.json'
+				url: '/api/catalog'
 			}
 		},
 		methods: {
@@ -38,6 +40,22 @@
 	        	} else {
 					this.filteredItems = this.items;
 	        	}
+			},
+			createNew(item) {
+                let newItem = JSON.parse(JSON.stringify(item));
+
+                this.$parent.post('/api/catalog', newItem)
+                    .then( res => {
+                        if (res.id) {
+                        	this.items.push({
+                        		id: res.id,
+                        		name: newItem.name,
+                        		style: newItem.style,
+                        		price: newItem.price,
+                        		img_link: newItem.img_link
+                        	})
+                        }
+                    })
 			}
 		},
 		mounted() {
