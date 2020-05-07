@@ -30,6 +30,16 @@ export default {
         get(url) {
             return fetch(url).then(d => d.json());
         },
+        post(url, item) {
+            return fetch(url, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(item)
+            })
+            .then(res => res.json())
+        },
         filterElements(payload) {
             this.filterString = payload;
         },

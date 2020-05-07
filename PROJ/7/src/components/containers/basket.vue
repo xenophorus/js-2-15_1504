@@ -43,6 +43,7 @@ export default {
             }
         },
         remove(item) {
+            // let find = this.items.find(el => el.id_product == item.id_product);
             if (item.quantity == 1) {
                 this.items.splice(this.items.indexOf(item), 1);
             } else {
