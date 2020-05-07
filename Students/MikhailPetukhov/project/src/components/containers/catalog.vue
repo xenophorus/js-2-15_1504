@@ -1,7 +1,11 @@
 <template>
     <div class="products" v-if="filteredItems.length">
 
-        <item v-for="item of filteredItems" :item="item" :key="item.id" :type="'catalog'"/>  
+        <item 
+        	v-for="item of filteredItems"
+        	:item="item"
+        	:key="item.id"
+        />  
 
     </div>
     <div v-else>
@@ -13,6 +17,12 @@
 	import item from'../components/item.vue';
 	export default {
 		components: { item },
+		props: {
+			filter: {
+				type: String,
+				default: ''
+			}
+		},
 		data() {
 			return {
 				items:[],
@@ -21,9 +31,13 @@
 			}
 		},
 		methods: {
-			filterItems(expression) {
-				const regexp = new RegExp(expression, 'i');
-        		this.filteredItems = this.items.filter(item => regexp.test(item.name));
+			filterItems(search) {
+				if (search) {
+					const regexp = new RegExp(search, 'i');
+	        		this.filteredItems = this.items.filter(item => regexp.test(item.name));
+	        	} else {
+					this.filteredItems = this.items;
+	        	}
 			}
 		},
 		mounted() {
@@ -39,6 +53,15 @@
 			// .finally(
 			// 	this.filteredItems = this.items
 			// )	
+		},
+		watch: {
+			filter: {
+				deep: true,
+				immediate: true,
+				handler() {
+					this.filterItems(this.filter);
+				}
+			}
 		}
 	}
 	

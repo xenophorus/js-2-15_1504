@@ -5,7 +5,13 @@
         </div>
         <hr>
 
-        <item v-for="item of items" :item="item" :key="item.id" :type="'basket'" @remove="remove"/>
+        <item
+          	v-for="item of items"
+        	:item="item"
+        	:key="item.id"
+        	:type="'basket'"
+        	@remove="remove"
+        />
 
         <hr>
 
@@ -31,17 +37,15 @@
                 if (find) {
                     find.quantity++;
                 } else {
-                let newBasketItem = Object.assign({}, item);
-                    newBasketItem.quantity = "1";
+                let newBasketItem = Object.assign({}, item, {quantity: 1});
                     this.items.push(newBasketItem);
                 }
             },
             remove(item) {
-                let find = this.items.find (product => product.id == item.id);
-                if (find.quantity > 1) {
-                    find.quantity--;
+                if (item.quantity > 1) {
+                    item.quantity--;
                 } else {
-                    this.items.splice (this.items.indexOf(find), 1);
+                    this.items.splice (this.items.indexOf(item), 1);
                 }
             }
         },
