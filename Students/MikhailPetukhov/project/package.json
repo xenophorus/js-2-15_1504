@@ -6,12 +6,16 @@
   "scripts": {
     "build": "webpack --mode development",
     "dev": "webpack-dev-server",
-	"api": "nodemon server"
+    "api": "nodemon server"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "nodemonConfig": { "ignore": ["*.json"] },
+  "nodemonConfig": {
+    "ignore": [
+      "*.json"
+    ]
+  },
   "devDependencies": {
     "@babel/core": "^7.9.6",
     "@babel/preset-env": "^7.9.6",

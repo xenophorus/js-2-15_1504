@@ -16,8 +16,9 @@
 
 <script>
 	import item from'../components/item.vue';
+	import stat from'../components/stat.vue';
 	export default {
-		components: { item },
+		components: { item, stat },
 		props: {
 			filter: {
 				type: String,
@@ -42,18 +43,12 @@
 	        	}
 			},
 			createNew(item) {
-                let newItem = JSON.parse(JSON.stringify(item));
-
-                this.$parent.post('/api/catalog', newItem)
-                    .then( res => {
-                        if (res.id) {
-                        	this.items.push({
-                        		id: res.id,
-                        		name: newItem.name,
-                        		style: newItem.style,
-                        		price: newItem.price,
-                        		img_link: newItem.img_link
-                        	})
+                this.$parent.post('/api/catalog', item)
+                    .then( response => {
+                        if (response.id) {
+                        	this.items.push(
+                        		Object.assign({}, item,  {id: response.id})
+                        	)
                         }
                     })
 			}

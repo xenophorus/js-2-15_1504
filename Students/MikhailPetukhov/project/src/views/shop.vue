@@ -35,11 +35,11 @@
                 return fetch(url, {
                     method: 'POST',
                     headers: {
-                        "Content-Type": "/application/json"
+                        "Content-Type": "application/json"
                     },
                     body: JSON.stringify(item)
                 })
-                .then(res => res.json())
+                .then(response => response.json())
             },      
             addToBasket(item) {
                 this.$refs.basket.add(item);

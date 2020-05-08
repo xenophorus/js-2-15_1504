@@ -1,7 +1,7 @@
 <template>
 	<div :class="type ==='catalog' || type === 'temp' ? 'product-item' : 'cart-item'">
         <img :src="type==='temp' ? placeHolder :  item.image_link ">
-        
+
 		<template v-if="type == 'catalog'">
             <div class="desc">
                 <h1>{{item.name}}</h1>
@@ -52,7 +52,7 @@
                     name: '',
                     style: '',
                     price: 0,
-                    image_link: '',
+                    image_link: "https://placehold.it/300x200",
                     },
                 placeHolder: "https://placehold.it/300x200",
                 }
@@ -76,7 +76,8 @@
                     this.newProduct = {
                         name: '',
                         style: '',
-                        price: 0
+                        price: 0,
+                        image_link: "https://placehold.it/300x200",
                     }
                 }
             }            

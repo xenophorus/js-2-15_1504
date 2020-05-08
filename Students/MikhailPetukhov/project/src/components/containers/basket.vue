@@ -28,7 +28,8 @@
         data() {
             return {
                 items: [],
-                url: 'https://raw.githubusercontent.com/petmik2018/shop_data/master/responses/getBasket.json'
+                // url: 'https://raw.githubusercontent.com/petmik2018/shop_data/master/responses/getBasket.json'
+                url: '/api/basket'
             }
         },
         methods: {
@@ -37,16 +38,18 @@
                 if (find) {
                     find.quantity++;
                 } else {
-                let newBasketItem = Object.assign({}, item, {quantity: 1});
-                    this.items.push(newBasketItem);
-                }
+                    let newBasketItem = Object.assign({}, item, {quantity: 1});
+                    this.items.push(newBasketItem);                    
+                } 
+                this.$parent.post('/api/basket/add', item);             
             },
             remove(item) {
                 if (item.quantity > 1) {
                     item.quantity--;
                 } else {
-                    this.items.splice (this.items.indexOf(item), 1);
+                    this.items.splice (this.items.indexOf(item), 1);                    
                 }
+                this.$parent.post('/api/basket/remove', item);
             }
         },
         mounted() {
