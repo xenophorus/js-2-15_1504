@@ -1,6 +1,7 @@
 <template>
   <div class="products">
     <item v-for="item of filtered" :item="item" :key="item.product_id"/>
+    <item :type="'temp'" @addNewItem="createNew"/>
   </div>
 </template>
 
@@ -18,7 +19,8 @@ export default {
         return {
             items: [],
             filtered: [],
-            url: 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/catalogData.json'
+            // url: 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/catalogData.json'
+            url: '/api/catalog'
         }
     },
     mounted() {
@@ -36,6 +38,20 @@ export default {
                 let reg = new RegExp(str, 'ig');
                 this.filtered = this.items.filter(el => reg.test(el.product_name));
             }
+        },
+        createNew(item) {
+            let newItem = JSON.parse(JSON.stringify(item));
+
+            this.$parent.post('/api/catalog', newItem)
+                .then( res => {
+                    if (res.id) {
+                        this.items.push({
+                            id_product: res.id,
+                            product_name: newItem.product_name,
+                            price: newItem.price
+                        })
+                    }
+                } )
         }
     },
     watch: {
