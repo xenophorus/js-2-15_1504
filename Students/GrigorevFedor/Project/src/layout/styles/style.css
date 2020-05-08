@@ -25,11 +25,6 @@ button:focus{
     transition: all ease-in-out .4s;
     cursor: pointer;
 }
-
-.hidden{
-    visibility: hidden;
-}
-
 .btn-cart:hover{
     background-color: transparent;
     border-color: #fafafa;
@@ -92,7 +87,7 @@ img {
     width: 300px;
 }
 
-.invisible{
+.hidden{
     display: none;
 }
 .cart-block:before{
