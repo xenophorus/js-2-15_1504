@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import catalog from '../components/containers/catalog.vue';
-import basket from '../components/containers/basket.vue';
-import filterItem from '../components/components/filterItem.vue';
+import catalog from '../containers/catalog.vue';
+import basket from '../containers/basket.vue';
+import filterItem from '../components/filterItem.vue';
 export default {
     components: { catalog, basket, 'filter-item': filterItem },
     data() {
