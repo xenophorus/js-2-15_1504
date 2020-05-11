@@ -1,0 +1,32 @@
+[
+ {
+  "id_product": 123,
+  "product_name": "Ноутбук",
+  "price": 45600,
+  "quantity": 1
+ },
+ {
+  "id_product": 456,
+  "product_name": "Мышка",
+  "price": 1000,
+  "quantity": 1
+ },
+ {
+  "id_product": 7,
+  "product_name": "USB-camera",
+  "price": 18,
+  "quantity": 1
+ },
+ {
+  "id_product": 3,
+  "product_name": "Keyboard",
+  "price": 20,
+  "quantity": 13
+ },
+ {
+  "id_product": 2,
+  "product_name": "Display",
+  "price": 200,
+  "quantity": 6
+ }
+]
