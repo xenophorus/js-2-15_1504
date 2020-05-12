@@ -3,27 +3,26 @@
 let app = new Vue({
     el: '#app',
     data: {
-        API: 'https://raw.githubusercontent.com/xenophorus/static/master/',
-        jsonGoods: 'goods.json',
-        itemsGoods: [],
+        url: 'https://raw.githubusercontent.com/xenophorus/static/master/goods.json',
+        data: [],
     },
     methods: {
-        get() {
-            return fetch(url)
-                .then(d => d.json())
-        },
 
     },
     computed: {
+        image() {
+            console.log(this.data[this.data.id].img)
+            return this.data[this.data.id].img
+        }
 
     },
     async mounted() {
         try {
-            let data = await this.get(this.API + this.url);
+            this.data = await fetch(this.url).then(d => d.json());
         } catch (e) {
             console.log(`Error loading data, ${e}`);
         } finally {
-            console.log(data)
+            console.log(this.data)
         }
     },
 
