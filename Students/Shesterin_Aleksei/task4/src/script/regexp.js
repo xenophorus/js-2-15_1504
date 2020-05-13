@@ -20,12 +20,12 @@ let str = "One:Â 'Hi Mary.' " +
     "One:Â 'Sure. Bye.'"
 
 const regexp1 = /'/gi
-console.log(str.replace(regexp, '\"'))
+console.log(str.replace(regexp1, '\"'))
 
 // Улучшить шаблон так, чтобы в конструкциях типа aren't одинарная кавычка не заменялась на двойную.
 
-const regexp2 = /'/gi
-console.log(str.replace(regexp, '\"'))
+const regexp2 = /.'\s|\s'|'\\/gi
+console.log(str.replace(regexp2, '\"'))
 
 
 //* Создать форму обратной связи с полями: Имя, Телефон, E-mail, текст, кнопка Отправить.
@@ -36,3 +36,45 @@ console.log(str.replace(regexp, '\"'))
 // d.  Текст произвольный.
 // e.  Если одно из полей не прошло валидацию, необходимо выделить это поле красной рамкой
 //     и сообщить пользователю об ошибке.
+
+// Сделал немного иначе, можно было бы переделать на нажатие кнопки, но уже не стал
+
+class formListener {
+    constructor() {
+        self.nameR = /^[A-Z][a-z]+\s[A-Z][a-z]+/;
+        self.emailR = /^[a-z-_\.]+@[a-z-_]+\.[a-z]+$/gi;
+        self.phoneR = /^\+\d\(\d{3}\)\d{3}-\d{4}$/gi;
+    }
+
+    textListener() {
+        let inpFields = document.getElementsByName("inp")
+        inpFields.forEach(elem => {
+            console.log(elem.id)
+            switch (elem.id) {
+                case 'name':
+                    f(elem, self.nameR)
+                    break
+                case 'phone':
+                    f(elem, self.phoneR)
+                    break
+                case 'email':
+                    f(elem, self.emailR)
+                    break
+            }
+        })
+
+        function f(elem, reg) {
+            elem.addEventListener('input', () => {
+                if (elem.value.match(reg) === null) {
+                    elem.style.outline = '1px solid red'
+                } else {
+                    elem.style.outline = 'none'
+                    elem.style.backgroundColor = '#F3FDD3'
+                }
+            })
+        }
+    }
+}
+
+let c = new formListener();
+c.textListener();
