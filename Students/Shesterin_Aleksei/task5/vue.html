@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h1>Hello Vue!</h1>
+    <br>
+    <label> Enter your name:
+        <input type="text" v-model="userName">
+    </label>
+    <h2>Hello  {{ userName }}</h2><br>
+    <h2>{{ greetings }}</h2>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    let app = new Vue({
+        el: '#app',
+
+        data: {
+            userName: '',
+        },
+
+        methods: {
+
+        },
+        computed: {
+            greetings() {
+                return 'Hello ' + this.userName
+            },
+            hello(user) {
+                return 'Hello ' + user
+            },
+        },
+    });
+
+
+</script>
+
+</body>
+</html>

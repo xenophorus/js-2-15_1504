@@ -8,13 +8,13 @@
 <div class="d-flex">
     <form action="#">
         <fieldset>
-            <input type="radio" name="burger" id="big" checked data-price="100" data-cal="40" data-set="1">
+            <input type="radio" name="burger" id="big" checked data-price="100" data-cal="40">
             <label for="big">Большой бургер (100 rub., 40 cal)</label><br>
             <input type="radio" name="burger" id="small" data-price="50" data-cal="20">
             <label for="small">Маленький бургер (50 rub., 20 cal)</label>
         </fieldset>
         <fieldset>
-            <input type="radio" name="add" id="cheese" checked data-price="10" data-cal="20" data-set="1">
+            <input type="radio" name="add" id="cheese" checked data-price="10" data-cal="20">
             <label for="cheese">С сыром (+10 rub., +20 cal)</label><br>
             <input type="radio" name="add" id="salad" data-price="20" data-cal="5">
             <label for="salad">С салатом (+20 rub., +5 cal)</label><br>
@@ -22,12 +22,9 @@
             <label for="potato">С картофелем (+15 rub., +10 cal)</label>
         </fieldset>
         <fieldset>
-            <label>
-                <input type="checkbox" id="addspice">Добавить специи? <br>
-            </label>
-            <input type="radio" name="spice" id="mayon" data-price="15" data-cal="10" disabled="disabled">
+            <input type="checkbox" name="mayon" id="mayon" data-price="15" data-cal="10">
             <label for="mayon">С майонезом (+15 rub., +10 cal)</label><br>
-            <input type="radio" name="spice" id="spicy" data-price="15" data-cal="0" disabled="disabled">
+            <input type="checkbox" name="spice" id="spicy" data-price="15" data-cal="0">
             <label for="spicy">Со специями (+15 rub., +0 cal)</label>
         </fieldset>
         <fieldset>
@@ -35,6 +32,9 @@
         </fieldset>
     </form>
 </div>
+<script>
+
+</script>
 <script src="../script/js/main.js"></script>
 </body>
 </html>

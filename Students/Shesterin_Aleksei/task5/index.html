@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+    <div class="product">
+        <div class="product-image">
+            <img v-bind:src="image" :alt="altText">
+        </div>
+        <div class="product-info">
+            <h1 v-if="onSale">{{ title + ' on sale!'}}</h1>
+            <h1 v-else>{{ title }}</h1>
+            <p>{{ description }}</p>
+            <p v-if="inventory > 10">In Stock {{inventory}}</p>
+            <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out! {{inventory}}</p>
+            <p v-else :style="{ textDecoration: 'line-through' }">Out of Stock</p>
+            <span v-show="sales">On sale!</span>
+            <ul>
+                <li v-for="d in details">{{ d }}</li>
+            </ul>
+            <ul>sizes available:
+                <li v-for="s in sizes">{{ s }}</li>
+
+            </ul>
+            <div v-for="(v, index) in variants"
+                 :key="v.variantId"
+                 class="color-box"
+                 :style="{backgroundColor: v.variantColor}"
+                 @mouseover="updateProduct(index)">
+            </div>
+
+            <button v-on:click="addToCart"
+                    :disabled="inventory <= 0"
+                    :class="{disabledButton: inventory <= 0}">Add to cart
+            </button>
+            <div class="cart">
+                <p>Cart({{ cart }})</p>
+                <button v-on:click="RemoveFromCart"
+                        :disabled="cart <= 0"
+                        :class="{disabledButton: cart <= 0}">Remove
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="./script.js"></script>
+</body>
+<!--
+https://www.vuemastery.com/courses/intro-to-vue-js/components
+
+ -->
+
+</html>
