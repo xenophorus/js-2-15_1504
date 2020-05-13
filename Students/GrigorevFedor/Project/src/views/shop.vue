@@ -3,18 +3,13 @@
     <header>
         <div class="logo">E-shop</div>
         <div class="cart">
-            <form action="#" class="search-form">
-                <input type="text" class="search-field" v-model="filterStr">
-                <button class="btn-search" @click.prevent="filterItems">
-                    <i class="fas fa-search"></i>
-                </button>
-            </form>
+            <filter-item @search="filterElements"/>
             <button class="btn-cart" @click="showBasket = !showBasket">Cart</button>
             <basket v-show="showBasket" ref="basket"/>
         </div>
     </header>
     <main>
-        <catalog @add="addToBasket" :filterStr="filterStr" ref="catalog"/>
+        <catalog @add="addItem" :filter="filterString"/>
     </main>
   </div>
 </template>
@@ -22,24 +17,34 @@
 <script>
 import catalog from '../components/containers/catalog.vue';
 import basket from '../components/containers/basket.vue';
+import filterItem from '../components/components/filterItem.vue';
 export default {
-    components: { catalog, basket },
-    
+    components: { catalog, basket, 'filter-item': filterItem },
     data() {
         return {
             showBasket: false,
-            filterStr:''
+            filterString: ''
         }
     },
     methods: {
         get(url) {
             return fetch(url).then(d => d.json());
         },
-        addToBasket(item) {
-            this.$refs.basket.addToBasket(item);
+        post(url, item) {
+            return fetch(url, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(item)
+            })
+            .then(res => res.json())
         },
-        filterItems(){
-            this.$refs.catalog.filter();   
+        filterElements(payload) {
+            this.filterString = payload;
+        },
+        addItem(item) {
+            this.$refs.basket.add(item);
         }
     }
 }

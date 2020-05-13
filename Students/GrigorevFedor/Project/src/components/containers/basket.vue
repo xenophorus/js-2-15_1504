@@ -1,17 +1,17 @@
 <template>
   <div class="cart-block">
     <div class="d-flex">
-        <strong class="d-block">Всего товаров</strong> {{ totalCount }}<div id="quantity"></div>
+        <strong class="d-block">Всего товаров</strong> {{ totalCount }} <div id="quantity"></div>
     </div>
     <hr>
     
     <item 
+        type="basket" 
         v-for="item of items" 
-        :item="item" 
-        :key="item.product_id" 
-        :type="'basket' " 
-        @remove="removeFromBasket"
-    />
+        :key="item.id_product"
+        :item="item"
+        @remove="remove"
+    /> <!--не забыть все пропы-->
 
     <hr>
     <div class="d-flex">
@@ -27,34 +27,42 @@ export default {
     data() {
         return {
             items: [],
+            url: '/api/basket'
         }
     },
     methods: {
-        addToBasket(item) {
-            let find = this.items.find (product => product.id === item.id_product)
-            if (find) {
-                find.quantity++
+        add(item) {
+            
+            let newItem = JSON.parse(JSON.stringify(item));
+
+            this.$parent.post('/api/addtobasket', newItem)
+                .then( res => {
+                    if (res.id) {
+                        console.log(this.items)
+                        let find = this.items.find(el => el.id_product == item.id_product);
+                        if (!find) {
+                            this.items.push(Object.assign({}, item, {quantity: 1}));
+                        } else {
+                            find.quantity++;
+                        }
+                    }
+                } )
+            },
+        remove(item) {
+            // let find = this.items.find(el => el.id_product == item.id_product);
+            if (item.quantity == 1) {
+                this.items.splice(this.items.indexOf(item), 1);
             } else {
-                this.items.push ({
-                    name: item.product_name,
-                    price: item.price,
-                    id: item.id_product,
-                    quantity: 1
-                })
+                item.quantity--;
             }
-        },
-        removeFromBasket(item) {
-            let find = this.items.find (product => product.id === item.id)
-            if (find.quantity > 1) {
-                find.quantity--
-            } else {
-                this.items.splice (this.items.indexOf(find), 1)
-            }
-        },
-        
+        }
     },
     mounted() {
-        
+        this.$parent.get(this.url)
+        .then(data => { 
+            this.items = data; 
+        });
+        //запрос - размещение
     },
     computed: {
         totalCount: function ()  {
@@ -64,7 +72,6 @@ export default {
             });
             return totalCount    
         },
-
         totalSum: function ()  {
             let totalSum = 0;
             this.items.forEach(element => {
