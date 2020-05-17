@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --mode development",
     "dev": "webpack-dev-server",
-    "api": "nodemon server --inspect"
+    "api": "nodemon server"
   },
   "keywords": [],
   "author": "",

@@ -1,0 +1,152 @@
+[
+ {
+  "time": "2020-05-09T09:17:29.679Z",
+  "action": "increase",
+  "item": "Notebook"
+ },
+ {
+  "time": "2020-05-09T09:17:30.639Z",
+  "action": "add",
+  "item": "Display"
+ },
+ {
+  "time": "2020-05-09T09:17:31.206Z",
+  "action": "increase",
+  "item": "Display"
+ },
+ {
+  "time": "2020-05-09T09:17:31.958Z",
+  "action": "add",
+  "item": "Keyboard"
+ },
+ {
+  "time": "2020-05-09T09:17:33.139Z",
+  "action": "decrease",
+  "item": "Notebook"
+ },
+ {
+  "time": "2020-05-09T09:17:33.396Z",
+  "action": "decrease",
+  "item": "Notebook"
+ },
+ {
+  "time": "2020-05-09T09:18:00.916Z",
+  "action": "decrease",
+  "item": "Notebook"
+ },
+ {
+  "time": "2020-05-09T09:18:12.674Z",
+  "action": "decrease",
+  "item": "Notebook"
+ },
+ {
+  "time": "2020-05-09T09:19:43.518Z",
+  "action": "delete",
+  "item": "Notebook"
+ },
+ {
+  "time": "2020-05-09T09:19:46.285Z",
+  "action": "delete",
+  "item": "Keyboard"
+ },
+ {
+  "time": "2020-05-09T09:19:47.606Z",
+  "action": "decrease",
+  "item": "Display"
+ },
+ {
+  "time": "2020-05-09T09:19:48.424Z",
+  "action": "delete",
+  "item": "Display"
+ },
+ {
+  "time": "2020-05-09T09:45:53.336Z",
+  "action": "add",
+  "item": "Notebook"
+ },
+ {
+  "time": "2020-05-09T09:46:02.973Z",
+  "action": "add",
+  "item": "Display"
+ },
+ {
+  "time": "2020-05-13T16:42:48.325Z",
+  "action": "add",
+  "item": "Mouse"
+ },
+ {
+  "time": "2020-05-13T16:42:48.503Z",
+  "action": "increase",
+  "item": "Mouse"
+ },
+ {
+  "time": "2020-05-13T16:42:49.629Z",
+  "action": "decrease",
+  "item": "Mouse"
+ },
+ {
+  "time": "2020-05-13T16:42:49.820Z",
+  "action": "delete",
+  "item": "Mouse"
+ },
+ {
+  "time": "2020-05-13T17:12:23.326Z",
+  "action": "add",
+  "item": "Keyboard"
+ },
+ {
+  "time": "2020-05-13T17:12:23.805Z",
+  "action": "increase",
+  "item": "Keyboard"
+ },
+ {
+  "time": "2020-05-13T17:12:24.016Z",
+  "action": "increase",
+  "item": "Keyboard"
+ },
+ {
+  "time": "2020-05-13T17:12:24.235Z",
+  "action": "increase",
+  "item": "Keyboard"
+ },
+ {
+  "time": "2020-05-13T17:12:25.368Z",
+  "action": "decrease",
+  "item": "Keyboard"
+ },
+ {
+  "time": "2020-05-13T17:12:25.569Z",
+  "action": "decrease",
+  "item": "Keyboard"
+ },
+ {
+  "time": "2020-05-13T17:12:25.767Z",
+  "action": "decrease",
+  "item": "Keyboard"
+ },
+ {
+  "time": "2020-05-13T17:12:26.251Z",
+  "action": "delete",
+  "item": "Keyboard"
+ },
+ {
+  "time": "2020-05-13T21:56:51.297Z",
+  "action": "delete",
+  "item": "Display"
+ },
+ {
+  "time": "2020-05-13T21:56:52.637Z",
+  "action": "delete",
+  "item": "Notebook"
+ },
+ {
+  "time": "2020-05-13T21:56:58.890Z",
+  "action": "add",
+  "item": "Mouse"
+ },
+ {
+  "time": "2020-05-13T21:56:59.366Z",
+  "action": "increase",
+  "item": "Mouse"
+ }
+]
