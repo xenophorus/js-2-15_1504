@@ -5,7 +5,13 @@
     </div>
     <hr>
     
-    <item /> <!--не забыть все пропы-->
+    <item 
+        type="basket" 
+        v-for="item of items" 
+        :key="item.id_product"
+        :item="item"
+        @remove="remove"
+    /> <!--не забыть все пропы-->
 
     <hr>
     <div class="d-flex">
@@ -21,16 +27,34 @@ export default {
     data() {
         return {
             //айтемы и урл
+            items: [],
+            url: 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/getBasket.json'
         }
     },
     methods: {
         //добавить товар
         //удалить товар
-        helloItem(item) {
-            console.log('I received ', item);
+        add(item) {
+            let find = this.items.find(el => el.id_product == item.id_product);
+            if (!find) {
+                this.items.push(Object.assign({}, item, {quantity: 1}));
+            } else {
+                find.quantity++;
+            }
+        },
+        remove(item) {
+            if (item.quantity == 1) {
+                this.items.splice(this.items.indexOf(item), 1);
+            } else {
+                item.quantity--;
+            }
         }
     },
     mounted() {
+        this.$parent.get(this.url)
+        .then(data => { 
+            this.items = data.contents; 
+        });
         //запрос - размещение
     },
     computed: {

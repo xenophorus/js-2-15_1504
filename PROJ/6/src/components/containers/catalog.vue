@@ -1,6 +1,6 @@
 <template>
   <div class="products">
-    <item v-for="item of items" :item="item" :key="item.product_id" :type="'catalog'"/>
+    <item v-for="item of filtered" :item="item" :key="item.product_id"/>
   </div>
 </template>
 
@@ -8,9 +8,16 @@
 import item from '../components/item.vue';
 export default {
     components: { item },
+    props: {
+        filter: {
+            type: String,
+            default: ''
+        }
+    },
     data() {
         return {
             items: [],
+            filtered: [],
             url: 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/catalogData.json'
         }
     },
@@ -18,11 +25,28 @@ export default {
         this.$parent.get(this.url)
         .then(data => { 
             this.items = data; 
+            this.filtered = data; 
         });
     },
     methods: {
-
-    }
+        search(str) {
+            if (!str) {
+                this.filtered = this.items;
+            } else {
+                let reg = new RegExp(str, 'ig');
+                this.filtered = this.items.filter(el => reg.test(el.product_name));
+            }
+        }
+    },
+    watch: {
+        filter: {
+            // deep: true, //или false
+            // immediate: true, //немедленно
+            handler() {
+                this.search(this.filter);
+            }
+        }
+    },
 }
 </script>
 
