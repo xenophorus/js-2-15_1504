@@ -4,7 +4,11 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './styles/style.css';
 import './styles/normalize.css';
 
-import app from './script/main.js';
+import Vue from 'vue';
+import app from './app.vue';
 
-app();
+new Vue({
+    render: h => h(app)
+}).$mount("#app");
+
 
