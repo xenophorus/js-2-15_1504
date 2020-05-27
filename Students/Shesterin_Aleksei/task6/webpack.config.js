@@ -22,7 +22,7 @@ module.exports = {
                 exclude: /node-modules/
             },
             {
-                use: /\.vue$/,
+                test: /\.vue$/,
                 loader: 'vue-loader',
                 exclude: /node-modules/
             }
